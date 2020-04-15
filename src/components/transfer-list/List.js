@@ -4,14 +4,12 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 
 import {
   ListWrapper,
-  ItemWrapper,
-  ItemWrapperAll,
 } from "./styled";
 
-export const List = ({ items, listName, ListItem }) => {
+export const List = ({ items, listName, ListItem, HeaderComponent }) => {
   return (
     <div>
-      {listName}
+      {HeaderComponent && <HeaderComponent listName={listName} />} 
       <Droppable droppableId={listName}>
         {(provided, snapshot) => {
           return (

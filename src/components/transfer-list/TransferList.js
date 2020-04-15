@@ -13,7 +13,8 @@ export const TransferList = ({
   defaultList = 0,
   needFormat = false,
   ListItem,
-  onDragEnd: onDragEndProps
+  onDragEnd: onDragEndProps,
+  HeaderComponent
 }) => {
   const [mappedItems, setMappedItems] = useState(
     needFormat
@@ -65,6 +66,7 @@ export const TransferList = ({
               listName={listName}
               items={mappedItems[listName]}
               ListItem={ListItem}
+              HeaderComponent={HeaderComponent}
             />
           );
         })}

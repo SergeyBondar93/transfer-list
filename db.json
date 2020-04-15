@@ -5,19 +5,23 @@
   "books": {
     "inRead": [
       {
-        "author": 2,
-        "name": "name2"
-      },
-      {
         "author": 8,
         "name": "name8"
       },
       {
-        "author": 7,
-        "name": "name7"
+        "name": "Анна",
+        "author": "Анна"
       }
     ],
     "readed": [
+      {
+        "author": 7,
+        "name": "name7"
+      },
+      {
+        "author": 6,
+        "name": "name6"
+      },
       {
         "author": 4,
         "name": "name4"
@@ -25,16 +29,20 @@
     ],
     "inPlans": [
       {
-        "author": 6,
-        "name": "name6"
+        "author": 2,
+        "name": "name2"
+      },
+      {
+        "name": "fsd",
+        "author": "fsdfs"
       },
       {
         "author": 3,
         "name": "name3"
       },
       {
-        "author": "Анна",
-        "name": "Анна"
+        "name": "Сергей",
+        "author": "Анна"
       }
     ]
   }
