@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const ListWrapper = styled.div`
-  width: 200px;
+  width: ${({ width }) => `${width}px`};
   height: calc(100vh - 150px);
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -10,13 +10,13 @@ export const ListWrapper = styled.div`
 
 export const ItemWrapper = styled.div`
   height: 30px;
-  background-color: ${({ odd }) => odd ? 'rgb(217, 243, 174);' : 'white'};
+  background-color: ${({ odd }) => (odd ? "rgb(217, 243, 174);" : "white")};
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-basis: 60%;
   flex-grow: 2;
-`
+`;
 
 export const TransferListWrapper = styled.div`
   border: 1px solid #ccc;
@@ -25,4 +25,4 @@ export const TransferListWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   user-select: none;
-`
+`;

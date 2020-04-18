@@ -51,19 +51,46 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        width: "250px",
+        width: "400px",
         border: "1px solid black",
         padding: "50px 0px",
       }}
     >
       {fields.map((field) => {
+        if (field.type === "textarea") {
+          return (
+            <div
+              style={{
+                margin: "15px",
+              }}
+            >
+              <textarea
+                onChange={(e) => handleChange(e.target.value, e)}
+                name={field.name}
+                placeholder={field.placeholder}
+                id={field.id}
+                style={{
+                  width: "360px",
+                  height: "200px",
+                }}
+              />
+            </div>
+          );
+        }
+
         return (
-          <Input
-            onChange={handleChange}
-            name={field.name}
-            placeholder={field.placeholder}
-            id={field.id}
-          />
+          <div
+            style={{
+              margin: "15px",
+            }}
+          >
+            <Input
+              onChange={handleChange}
+              name={field.name}
+              placeholder={field.placeholder}
+              id={field.id}
+            />
+          </div>
         );
       })}
       <Button disabled={disabled} onClick={handleCreate}>

@@ -1,47 +1,53 @@
+const name = {
+  name: "name",
+  required: true,
+  minLength: 3,
+  placeholder: "name",
+};
 
+const link = {
+  name: "link",
+  required: true,
+  minLength: 3,
+  placeholder: "link",
+};
 
-export const books = [
-  {
-    name: "name",
-    required: true,
-    minLength: 3,
-    placeholder: 'name',
-  },
-  {
-    name: "author",
-    required: true,
-    minLength: 3,
-    placeholder: 'author',
-  },
-];
+const author = {
+  name: "author",
+  required: true,
+  minLength: 3,
+  placeholder: "author",
+};
 
-export const category = [
-  {
-    name: "name",
-    required: true,
-    minLength: 3,
-    placeholder: 'name',
-  },
-  {
-    name: "lists",
-    required: true,
-    minLength: 1,
-    placeholder: 'lists',
-    type: 'array'
-  },
-];
+const description = {
+  name: "description",
+  required: true,
+  minLength: 3,
+  placeholder: "Description, to set the priority, use !!! (1/2/3)",
+};
 
-export const youTube = [
-  {
-    name: "name",
-    required: true,
-    minLength: 3,
-    placeholder: 'name',
-  },
-  {
-    name: "link",
-    required: true,
-    minLength: 3,
-    placeholder: 'link',
-  },
-];
+const lists = {
+  name: "lists",
+  required: true,
+  minLength: 3,
+  placeholder: "Lists",
+};
+const multy = {
+  name: "multy",
+  required: true,
+  minLength: 3,
+  type: "textarea",
+  placeholder:
+    "Multy insert, to divide using new line. All items add to field 'description' ",
+};
+
+export const schemas = {
+  books: [name, link, description],
+  articles: [name, link, description],
+  films: [name, link, description],
+  courses: [name, link, description],
+  work: [name, link, description],
+  other: [name, link, description],
+  category: [name, lists],
+  multy: [multy],
+};

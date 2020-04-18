@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { TransferList } from "../components/transfer-list";
 
 import { CreateItem } from "../components/create-item-to-list";
-import { books } from "../schemas";
+import { schemas } from "../schemas";
 import { BookItem } from "../components/book-item";
 import Button from "@xcritical/button";
 import { Popover } from "@xcritical/popover";
@@ -63,6 +63,19 @@ export const Main = () => {
     [categoryData, selectedCategory]
   );
 
+  const onMultiInsert = useCallback(
+    ({ listName, form: { multy } }) => {
+      const data = multy.split("\n").map((description) => ({ description }));
+
+      const newItems = {
+        ...categoryData,
+        [listName]: [...categoryData[listName], ...data],
+      };
+      updateCategory({ data: newItems, dispatch, url: selectedCategory.url });
+    },
+    [categoryData, selectedCategory]
+  );
+
   const onRemove = useCallback(
     ({ index, listName }) => {
       let newItems = { ...categoryData };
@@ -81,17 +94,42 @@ export const Main = () => {
 
   const BookCreateRenderer = ({ listName }) => {
     return (
-      <Popover
-        trigger="click"
-        content={
-          <CreateItem listName={listName} onCreate={onCreate} fields={books} />
-        }
+      <div
+        style={{
+          display: "flex",
+        }}
       >
-        <div>
-          {upperCase(listName)}
-          <Button>+</Button>
-        </div>
-      </Popover>
+        <Popover
+          trigger="click"
+          positionFixed
+          content={
+            <CreateItem
+              listName={listName}
+              onCreate={onCreate}
+              fields={schemas[selectedCategory.url]}
+            />
+          }
+        >
+          <div>
+            {upperCase(listName)}
+            <Button>+</Button>
+          </div>
+        </Popover>
+        <Popover
+          trigger="click"
+          content={
+            <CreateItem
+              listName={listName}
+              onCreate={onMultiInsert}
+              fields={schemas["multy"]}
+            />
+          }
+        >
+          <div>
+            <Button>Multi insert</Button>
+          </div>
+        </Popover>
+      </div>
     );
   };
 

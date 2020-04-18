@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -14,8 +14,10 @@ export const TransferList = ({
   needFormat = false,
   ListItem,
   onDragEnd: onDragEndProps,
-  HeaderComponent
+  HeaderComponent,
 }) => {
+  const wrapperRef = useRef();
+
   const [mappedItems, setMappedItems] = useState(
     needFormat
       ? createState({ items, lists, defaultList, fieldByCreateLists })
@@ -25,17 +27,10 @@ export const TransferList = ({
   useEffect(() => {
     setMappedItems(
       needFormat
-      ? createState({ items, lists, defaultList, fieldByCreateLists })
-      : addGuid(items)
-    )
-  }, [
-    needFormat, 
-    items,
-    lists,
-    defaultList,
-    fieldByCreateLists
-  ])
-
+        ? createState({ items, lists, defaultList, fieldByCreateLists })
+        : addGuid(items)
+    );
+  }, [needFormat, items, lists, defaultList, fieldByCreateLists]);
 
   const onDragEnd = (res) => {
     if (!res.destination) return;
@@ -57,10 +52,11 @@ export const TransferList = ({
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <TransferListWrapper>
+      <TransferListWrapper ref={wrapperRef}>
         {lists.map((listName) => {
           return (
             <List
+              listWidth={wrapperRef.current?.clientWidth / lists.length}
               key={listName}
               setItems={setMappedItems}
               listName={listName}

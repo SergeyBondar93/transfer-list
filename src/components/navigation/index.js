@@ -1,16 +1,8 @@
 import React, { useCallback } from "react";
 import { CreateCategory } from "../create-category";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
 import { changeSelectedCategory } from "../../actions/actions";
-
-const LinkCategoryWrapper = styled.div`
-  padding: 15px;
-  border: 1px solid #ccc;
-  text-shadow: ${({ isCurrent }) => isCurrent && "0px 0px 9px red"};
-  max-width: 150px;
-  cursor: pointer;
-`;
+import { LinkCategoryWrapper } from "./styled";
 
 const Link = ({ category }) => {
   const dispatch = useDispatch();

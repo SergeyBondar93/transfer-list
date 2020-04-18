@@ -15,88 +15,44 @@
     {
       "name": "Курсы",
       "url": "courses"
+    },
+    {
+      "name": "Рабочие задачи",
+      "url": "work"
+    },
+    {
+      "name": "Остальное",
+      "url": "other"
     }
   ],
   "books": {
-    "inRead": [
-      {
-        "name": "Анна",
-        "author": "Анна"
-      },
-      {
-        "author": 6,
-        "name": "name6"
-      },
-      {
-        "author": 3,
-        "name": "name3"
-      }
-    ],
-    "readed": [
-      {
-        "author": 8,
-        "name": "name8"
-      },
-      {
-        "name": "Сергей",
-        "author": "Анна"
-      },
-      {
-        "name": "gfdg",
-        "author": "gdfgdfgd"
-      }
-    ],
-    "inPlans": [
-      {
-        "author": 2,
-        "name": "name2"
-      },
-      {
-        "author": 4,
-        "name": "name4"
-      },
-      {
-        "name": "gdfgdfg",
-        "author": "gdfgdf"
-      },
-      {
-        "name": "fsd",
-        "author": "fsdfs"
-      },
-      {
-        "author": 7,
-        "name": "name7"
-      }
-    ]
+    "inPlans": [],
+    "inRead": [],
+    "readed": []
   },
   "articles": {
+    "inPlans": [],
     "inRead": [],
-    "readed": [
-      {
-        "name": "хабр",
-        "author": "что ни будь"
-      }
-    ],
-    "inPlans": [
-      {
-        "name": "аываыв",
-        "author": "аываыаываыв"
-      }
-    ]
+    "readed": []
   },
   "films": {
-    "inRead": [
-      {
-        "name": "Анна",
-        "author": "gdfgdf"
-      }
-    ],
-    "readed": [],
-    "inPlans": []
+    "inPlans": [],
+    "watched": []
   },
   "courses": {
-    "inRead": [],
-    "readed": [],
-    "inPlans": []
+    "inPlans": [],
+    "inProgress": [],
+    "Done": []
+  },
+  "work": {
+    "toDo": [],
+    "develop": [],
+    "codeRevie": [],
+    "done": []
+  },
+  "other": {
+    "inPlans": [],
+    "inProgress": [],
+    "Done": []
   }
 }

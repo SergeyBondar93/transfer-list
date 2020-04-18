@@ -1,8 +1,7 @@
 import React from "react";
 
-import Button from '@xcritical/button';
-import { WrapperItem, Description } from './styled';
-
+import Button from "@xcritical/button";
+import { WrapperItem, Description } from "./styled";
 
 export const BookItem = ({
   provided,
@@ -13,6 +12,10 @@ export const BookItem = ({
   item,
   onRemove,
 }) => {
+  const $item = Object.entries(item).filter(([key]) => {
+    return !key.startsWith("_");
+  });
+
   return (
     <WrapperItem
       ref={provided.innerRef}
@@ -24,10 +27,15 @@ export const BookItem = ({
       }}
     >
       <Description>
-        <p>Name: {item.name}</p>
-        <p>Author: {item.author}</p>
+        {$item.map(([name, value]) => {
+          return (
+            <p>
+              {name} : {"  "} {value}
+            </p>
+          );
+        })}
       </Description>
-      <Button onClick={() => onRemove({ index, listName })} >x</Button>
+      <Button onClick={() => onRemove({ index, listName })}>x</Button>
     </WrapperItem>
-  )
+  );
 };
