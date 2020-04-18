@@ -41,13 +41,13 @@ export const Main = () => {
 
   useEffect(() => {
     if (selectedCategory) {
-      getCategory({ dispatch, selectedCategory });
+      getCategory({ dispatch, url: selectedCategory.url });
     }
   }, [selectedCategory]);
 
   const onDragEnd = useCallback(
     (data) => {
-      updateCategory({ data, dispatch, selectedCategory });
+      updateCategory({ data, dispatch, url: selectedCategory.url });
     },
     [selectedCategory]
   );
@@ -58,7 +58,7 @@ export const Main = () => {
         ...categoryData,
         [listName]: [...categoryData[listName], form],
       };
-      updateCategory({ data: newItems, dispatch, selectedCategory });
+      updateCategory({ data: newItems, dispatch, url: selectedCategory.url });
     },
     [categoryData, selectedCategory]
   );
@@ -70,7 +70,7 @@ export const Main = () => {
         ...newItems,
         [listName]: [...categoryData[listName].filter((_el, i) => i !== index)],
       };
-      updateCategory({ data: newItems, dispatch, selectedCategory });
+      updateCategory({ data: newItems, dispatch, url: selectedCategory.url });
     },
     [categoryData, selectedCategory]
   );

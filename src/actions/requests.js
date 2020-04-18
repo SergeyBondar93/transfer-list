@@ -16,10 +16,9 @@ export const getCategories = ({ dispatch }) => {
   dispatch(registryUpdate("loading", false));
 };
 
-export const getCategory = ({ dispatch, selectedCategory }) => {
+export const getCategory = ({ dispatch, url }) => {
   dispatch(registryUpdate("loading", true));
-  console.log(selectedCategory);
-  fetch(`/${selectedCategory}`)
+  fetch(`/${url}`)
     .then((res) => res.json())
     .then((data) => dispatch(getCategorySuccess(data)))
     .catch((e) => getError(e));
@@ -27,10 +26,12 @@ export const getCategory = ({ dispatch, selectedCategory }) => {
   dispatch(registryUpdate("loading", false));
 };
 
-export const updateCategory = ({ dispatch, data, selectedCategory }) => {
+export const updateCategory = ({ dispatch, data, url }) => {
   dispatch(registryUpdate("loading", true));
 
-  fetch(`/${selectedCategory}`, {
+  dispatch(getCategorySuccess(data));
+
+  fetch(`/${url}`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -38,7 +39,9 @@ export const updateCategory = ({ dispatch, data, selectedCategory }) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => dispatch(getCategorySuccess(data)))
+    .then((data) => {
+      console.log("success");
+    })
     .catch((e) => getError(e));
 
   dispatch(registryUpdate("loading", false));
@@ -49,7 +52,7 @@ export const createCategory = ({ dispatch, name, lists, categories }) => {
 
   fetch("/categories", {
     method: "POST",
-    body: JSON.stringify([...categories, name]),
+    body: JSON.stringify([...categories, { name }]),
     headers: {
       "Content-Type": "application/json",
     },

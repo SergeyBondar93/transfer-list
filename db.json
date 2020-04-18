@@ -1,6 +1,21 @@
 {
   "categories": [
-    "books"
+    {
+      "name": "Книги",
+      "url": "books"
+    },
+    {
+      "name": "Статьи",
+      "url": "articles"
+    },
+    {
+      "name": "Фильмы",
+      "url": "films"
+    },
+    {
+      "name": "Курсы",
+      "url": "courses"
+    }
   ],
   "books": {
     "inRead": [
@@ -9,16 +24,12 @@
         "author": "Анна"
       },
       {
-        "name": "fsd",
-        "author": "fsdfs"
+        "author": 6,
+        "name": "name6"
       },
       {
         "author": 3,
         "name": "name3"
-      },
-      {
-        "name": "dasdas",
-        "author": "dasdas"
       }
     ],
     "readed": [
@@ -27,16 +38,12 @@
         "name": "name8"
       },
       {
-        "author": 7,
-        "name": "name7"
-      },
-      {
-        "author": 6,
-        "name": "name6"
-      },
-      {
         "name": "Сергей",
         "author": "Анна"
+      },
+      {
+        "name": "gfdg",
+        "author": "gdfgdfgd"
       }
     ],
     "inPlans": [
@@ -49,9 +56,47 @@
         "name": "name4"
       },
       {
+        "name": "gdfgdfg",
+        "author": "gdfgdf"
+      },
+      {
+        "name": "fsd",
+        "author": "fsdfs"
+      },
+      {
+        "author": 7,
+        "name": "name7"
+      }
+    ]
+  },
+  "articles": {
+    "inRead": [],
+    "readed": [
+      {
+        "name": "хабр",
+        "author": "что ни будь"
+      }
+    ],
+    "inPlans": [
+      {
+        "name": "аываыв",
+        "author": "аываыаываыв"
+      }
+    ]
+  },
+  "films": {
+    "inRead": [
+      {
         "name": "Анна",
         "author": "gdfgdf"
       }
-    ]
+    ],
+    "readed": [],
+    "inPlans": []
+  },
+  "courses": {
+    "inRead": [],
+    "readed": [],
+    "inPlans": []
   }
 }
