@@ -3,7 +3,7 @@ import { TransferList } from "../components/transfer-list";
 
 import { CreateItem } from "../components/create-item-to-list";
 import { schemas } from "../schemas";
-import { BookItem } from "../components/book-item";
+import { ListItem } from "../components/list-item";
 import Button from "@xcritical/button";
 import { Popover } from "@xcritical/popover";
 import upperCase from "lodash/upperCase";
@@ -65,7 +65,11 @@ export const Main = () => {
 
   const onMultiInsert = useCallback(
     ({ listName, form: { multy } }) => {
-      const data = multy.split("\n").map((description) => ({ description }));
+      const data = multy
+        .trim()
+        .split("\n")
+        .filter(Boolean)
+        .map((description) => ({ description: description.trim() }));
 
       const newItems = {
         ...categoryData,
@@ -88,11 +92,11 @@ export const Main = () => {
     [categoryData, selectedCategory]
   );
 
-  const ListItem = (props) => {
-    return <BookItem {...props} onRemove={onRemove} />;
+  const ListItemRenderer = (props) => {
+    return <ListItem {...props} onRemove={onRemove} />;
   };
 
-  const BookCreateRenderer = ({ listName }) => {
+  const ItemCreateRenderer = ({ listName }) => {
     return (
       <div
         style={{
@@ -101,7 +105,7 @@ export const Main = () => {
       >
         <Popover
           trigger="click"
-          positionFixed
+          position="bottom left"
           content={
             <CreateItem
               listName={listName}
@@ -117,6 +121,7 @@ export const Main = () => {
         </Popover>
         <Popover
           trigger="click"
+          position="bottom left"
           content={
             <CreateItem
               listName={listName}
@@ -142,9 +147,9 @@ export const Main = () => {
       <TransferList
         items={categoryData}
         lists={Object.keys(categoryData)}
-        ListItem={ListItem}
+        ListItem={ListItemRenderer}
         onDragEnd={onDragEnd}
-        HeaderComponent={BookCreateRenderer}
+        HeaderComponent={ItemCreateRenderer}
       />
     </div>
   );

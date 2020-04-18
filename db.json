@@ -51,8 +51,46 @@
     "done": []
   },
   "other": {
-    "inPlans": [],
+    "inPlans": [
+      {
+        "name": "Анна",
+        "link": "http://localhost:3000/",
+        "description": "тут пишем описание"
+      },
+      {
+        "description": "строка 1 не важная"
+      }
+    ],
     "inProgress": [],
-    "Done": []
+    "Done": [
+      {
+        "name": "Анна",
+        "link": "http://localhost:3000/",
+        "description": "dfsadfsfsd {!}"
+      },
+      {
+        "name": "Анна",
+        "link": "http://localhost:3000/",
+        "description": "книга оч крутая {!!}"
+      },
+      {
+        "name": "fdsfsd",
+        "link": "fsdfsd",
+        "description": "{!!!}"
+      },
+      {
+        "name": "dasda",
+        "link": "http://localhost:3000/",
+        "description": "тут приоритетная задача ровыаоывр ывоалрлывра ыв  {!!!!}"
+      },
+      {
+        "name": "Анна",
+        "link": "http://localhost:3000/",
+        "description": "dsadas {!!!!!}"
+      },
+      {
+        "description": "строка 3 очень важна {!!!!!}"
+      }
+    ]
   }
 }

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import Button from "@xcritical/button";
 import { WrapperItem, Description } from "./styled";
 
-export const BookItem = ({
+export const ListItem = ({
   provided,
   snapshot,
   index,
@@ -16,6 +16,12 @@ export const BookItem = ({
     return !key.startsWith("_");
   });
 
+  const priority = useMemo(() => {
+    if (!item.description) return 0;
+    const matches = (item.description.match(/{(!+)}/) || [])[1];
+    return matches?.length;
+  }, [item]);
+
   return (
     <WrapperItem
       ref={provided.innerRef}
@@ -26,7 +32,7 @@ export const BookItem = ({
         ...provided.draggableProps.style,
       }}
     >
-      <Description>
+      <Description priority={priority}>
         {$item.map(([name, value]) => {
           return (
             <p>

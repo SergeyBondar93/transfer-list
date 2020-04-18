@@ -23,7 +23,7 @@ const description = {
   name: "description",
   required: true,
   minLength: 3,
-  placeholder: "Description, to set the priority, use !!! (1/2/3)",
+  placeholder: "Description, to set the priority, use {!!!} (1/2/3)",
 };
 
 const lists = {
