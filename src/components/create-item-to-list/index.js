@@ -19,51 +19,50 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
 
   const disabled = useMemo(() => {
     let result = false;
-    fields.forEach(({ required, minLength, name, type = 'string' }) => {
+    fields.forEach(({ required, minLength, name, type = "string" }) => {
       if (required) {
-        if (type === 'string') {
-          if ((form[name] || '').length < minLength) result = true
-        };
-        if (type === 'array') {
-          const list = (form[name] || '').join(',').map(el => el.trim());
-          if (list.length < minLength) result = true
+        if (type === "string") {
+          if ((form[name] || "").length < minLength) result = true;
+        }
+        if (type === "array") {
+          const list = (form[name] || "").split(",").map((el) => el.trim());
+          if (list.length < minLength) result = true;
         }
       }
-    }) 
-    return result
+    });
+    return result;
   }, [form, fields]);
 
   const handleCreate = useCallback(() => {
     if (!disabled) {
-      console.log(form, listName)
-    onCreate({form, listName});
+      onCreate({ form, listName });
     }
   }, [form, disabled, listName]);
 
   if (!fields.length) {
-    console.error('Create Items need fields')
-    return null
+    console.error("Create Items need fields");
+    return null;
   }
 
   return (
-    <div 
+    <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '250px',
-        border: '1px solid black',
-        padding: '50px 0px'
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "250px",
+        border: "1px solid black",
+        padding: "50px 0px",
       }}
     >
       {fields.map((field) => {
         return (
-          <Input 
+          <Input
             onChange={handleChange}
-            name={ field.name } 
-            placeholder={field.placeholder} 
-            id={field.id} 
+            name={field.name}
+            placeholder={field.placeholder}
+            id={field.id}
           />
         );
       })}

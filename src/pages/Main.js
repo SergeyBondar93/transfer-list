@@ -1,154 +1,113 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { TransferList } from "../components/transfer-list";
-import { ItemWrapperAll, ItemWrapper } from "../components/transfer-list/styled";
-import { CreateItem } from "../components/item-creator";
+
+import { CreateItem } from "../components/create-item-to-list";
 import { books } from "../schemas";
 import { BookItem } from "../components/book-item";
-import { BookCreate } from "../components/book-create";
-import Button from '@xcritical/button';
-import { Popover } from '@xcritical/popover';
+import Button from "@xcritical/button";
+import { Popover } from "@xcritical/popover";
 import upperCase from "lodash/upperCase";
-
-
+import {
+  getCategories,
+  getCategory,
+  updateCategory,
+} from "../actions/requests";
+import { useDispatch, useSelector } from "react-redux";
+import { changeSelectedCategory } from "../actions/actions";
 
 export const Main = () => {
-  const [categoryItems, setCategoryItems] = useState({});
-  const [categories, setCategories] = useState([]);
-  const [categoryLists, setCategoryLists] = useState([]);
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const dispatch = useDispatch();
+  const { selectedCategory = "", categories = [], categoryData } = useSelector(
+    (state) => {
+      const { selectedCategory, data: categories } = state.categories;
+      const { data: categoryData } = state.category;
+      return {
+        selectedCategory,
+        categories,
+        categoryData,
+      };
+    }
+  );
 
   useEffect(() => {
-    fetch("/categories")
-      .then((res) => res.json())
-      .then((data) => setCategories(data))
-      .catch((e) => console.error(e));
+    getCategories({ dispatch });
   }, []);
 
   useEffect(() => {
     if (categories[0]) {
-      setSelectedCategory(categories[0]);
+      dispatch(changeSelectedCategory(categories[0]));
     }
   }, [categories]);
 
   useEffect(() => {
     if (selectedCategory) {
-      fetch(`/${selectedCategory}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCategoryItems(data);
-          setCategoryLists(Object.keys(data));
-        })
-        .catch((e) => console.error(e));
+      getCategory({ dispatch, selectedCategory });
     }
   }, [selectedCategory]);
 
   const onDragEnd = useCallback(
-    (lists) => {
-      fetch(`${selectedCategory}`, {
-        method: "POST",
-        body: JSON.stringify(lists),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setCategoryItems(data)
-        })
-        .catch((e) => console.log(e));
+    (data) => {
+      updateCategory({ data, dispatch, selectedCategory });
     },
     [selectedCategory]
   );
 
   const onCreate = useCallback(
     ({ form, listName }) => {
-      console.log(listName)
       const newItems = {
-        ...categoryItems,
-        [listName]: [...categoryItems[listName], form],
+        ...categoryData,
+        [listName]: [...categoryData[listName], form],
       };
-
-      fetch(`/${selectedCategory}/`, {
-        method: "POST",
-        body: JSON.stringify(newItems),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((data) => data.json())
-        .then((res) => {
-          setCategoryItems(res)
-        })
-        .catch((e) => console.log(e));
+      updateCategory({ data: newItems, dispatch, selectedCategory });
     },
-    [categoryItems, selectedCategory]
+    [categoryData, selectedCategory]
   );
 
-  const onRemove = useCallback(({ index, listName }) => {
-    let newItems = { ...categoryItems };
-    newItems = {
-      ...newItems,
-      [listName]: [...categoryItems[listName].filter((_el, i) => i !== index)]
-    };
-
-    fetch(`/${selectedCategory}/`, {
-      method: "POST",
-      body: JSON.stringify(newItems),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((data) => data.json())
-      .then((res) => {
-        setCategoryItems(res)
-      })
-      .catch((e) => console.log(e));
-
-  }, [categoryItems, selectedCategory])
-
+  const onRemove = useCallback(
+    ({ index, listName }) => {
+      let newItems = { ...categoryData };
+      newItems = {
+        ...newItems,
+        [listName]: [...categoryData[listName].filter((_el, i) => i !== index)],
+      };
+      updateCategory({ data: newItems, dispatch, selectedCategory });
+    },
+    [categoryData, selectedCategory]
+  );
 
   const ListItem = (props) => {
-    return (
-      <BookItem {...props} onRemove={onRemove}  />
-    );
+    return <BookItem {...props} onRemove={onRemove} />;
   };
 
   const BookCreateRenderer = ({ listName }) => {
     return (
-    <Popover
-      trigger='click'
-      content={
-        <CreateItem 
-          listName={listName}
-          onCreate={onCreate}
-          fields={books}
-        />
-      }
-    >
-      <div>
-        { upperCase(listName) } 
-        <Button>+</Button>
-      </div>
-    </Popover>
-    )
-  }
-
-
-  if (!selectedCategory || !Object.keys(categoryItems).length) {
-    return <p>You havent lists in this category</p>;
+      <Popover
+        trigger="click"
+        content={
+          <CreateItem listName={listName} onCreate={onCreate} fields={books} />
+        }
+      >
+        <div>
+          {upperCase(listName)}
+          <Button>+</Button>
+        </div>
+      </Popover>
+    );
   };
 
+  if (!selectedCategory || !Object.keys(categoryData).length) {
+    return <p>You havent lists in this category</p>;
+  }
 
   return (
     <div>
       <TransferList
-        items={categoryItems}
-        lists={categoryLists}
+        items={categoryData}
+        lists={Object.keys(categoryData)}
         ListItem={ListItem}
         onDragEnd={onDragEnd}
         HeaderComponent={BookCreateRenderer}
       />
     </div>
   );
-}
+};

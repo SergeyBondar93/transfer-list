@@ -5,32 +5,8 @@
   "books": {
     "inRead": [
       {
-        "author": 8,
-        "name": "name8"
-      },
-      {
         "name": "Анна",
         "author": "Анна"
-      }
-    ],
-    "readed": [
-      {
-        "author": 7,
-        "name": "name7"
-      },
-      {
-        "author": 6,
-        "name": "name6"
-      },
-      {
-        "author": 4,
-        "name": "name4"
-      }
-    ],
-    "inPlans": [
-      {
-        "author": 2,
-        "name": "name2"
       },
       {
         "name": "fsd",
@@ -41,8 +17,40 @@
         "name": "name3"
       },
       {
+        "name": "dasdas",
+        "author": "dasdas"
+      }
+    ],
+    "readed": [
+      {
+        "author": 8,
+        "name": "name8"
+      },
+      {
+        "author": 7,
+        "name": "name7"
+      },
+      {
+        "author": 6,
+        "name": "name6"
+      },
+      {
         "name": "Сергей",
         "author": "Анна"
+      }
+    ],
+    "inPlans": [
+      {
+        "author": 2,
+        "name": "name2"
+      },
+      {
+        "author": 4,
+        "name": "name4"
+      },
+      {
+        "name": "Анна",
+        "author": "gdfgdf"
       }
     ]
   }
