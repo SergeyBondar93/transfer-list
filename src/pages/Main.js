@@ -65,6 +65,7 @@ export const Main = () => {
 
   const onMultiInsert = useCallback(
     ({ listName, form: { multy } }) => {
+      if (!multy) return;
       const data = multy
         .trim()
         .split("\n")
