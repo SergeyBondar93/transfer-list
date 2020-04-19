@@ -45,9 +45,23 @@
     "Done": []
   },
   "work": {
-    "toDo": [],
-    "develop": [],
-    "codeRevie": [],
+    "toDo": [
+      {
+        "description": "задача 3 {!!}",
+        "_guid": "f6a21f10-823c-11ea-bf42-5505534337ad"
+      }
+    ],
+    "develop": [
+      {
+        "description": "задача 1 {!!}",
+        "name": "Анна"
+      }
+    ],
+    "codeRevie": [
+      {
+        "description": "задача 2"
+      }
+    ],
     "done": []
   },
   "other": {
@@ -55,13 +69,32 @@
       {
         "name": "Анна",
         "link": "http://localhost:3000/",
-        "description": "тут пишем описание"
+        "description": "исправили описание"
       },
       {
-        "description": "строка 1 не важная"
+        "name": "Анна",
+        "link": "http://localhost:3000/",
+        "description": "dsadas {!!!!!}",
+        "_guid": "aab575a1-8243-11ea-8195-615ff8de01d7"
       }
     ],
-    "inProgress": [],
+    "inProgress": [
+      {
+        "description": "строка 3 очень важна {!}"
+      },
+      {
+        "name": "dasda",
+        "link": "http://localhost:3000/",
+        "description": "тут приоритетная задача ровыаоывр ывоалрлывра ыв  {!}",
+        "_guid": "a87ff803-8243-11ea-8195-615ff8de01d7"
+      },
+      {
+        "name": "fdsfsd",
+        "link": "fsdfsd",
+        "description": "{!} тестируем",
+        "_guid": "b30cc644-8243-11ea-8195-615ff8de01d7"
+      }
+    ],
     "Done": [
       {
         "name": "Анна",
@@ -72,24 +105,6 @@
         "name": "Анна",
         "link": "http://localhost:3000/",
         "description": "книга оч крутая {!!}"
-      },
-      {
-        "name": "fdsfsd",
-        "link": "fsdfsd",
-        "description": "{!!!}"
-      },
-      {
-        "name": "dasda",
-        "link": "http://localhost:3000/",
-        "description": "тут приоритетная задача ровыаоывр ывоалрлывра ыв  {!!!!}"
-      },
-      {
-        "name": "Анна",
-        "link": "http://localhost:3000/",
-        "description": "dsadas {!!!!!}"
-      },
-      {
-        "description": "строка 3 очень важна {!!!!!}"
       }
     ]
   }

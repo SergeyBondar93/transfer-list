@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import Button from "@xcritical/button";
 import { WrapperItem, Description } from "./styled";
+import { EditItem } from "../edit-item";
 
 export const ListItem = ({
   provided,
@@ -11,6 +12,7 @@ export const ListItem = ({
   listName,
   item,
   onRemove,
+  selectedCategory,
 }) => {
   const $item = Object.entries(item).filter(([key]) => {
     return !key.startsWith("_");
@@ -41,7 +43,15 @@ export const ListItem = ({
           );
         })}
       </Description>
-      <Button onClick={() => onRemove({ index, listName })}>x</Button>
+      <div>
+        <Button onClick={() => onRemove({ index, listName })}>x</Button>
+        <EditItem
+          item={item}
+          selectedCategory={selectedCategory}
+          index={index}
+          listName={listName}
+        />
+      </div>
     </WrapperItem>
   );
 };

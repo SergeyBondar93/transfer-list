@@ -37,7 +37,7 @@ export const Navigation = () => {
       }}
     >
       {categories.map((category) => {
-        return <Link category={category} />;
+        return <Link key={category.url} category={category} />;
       })}
 
       <CreateCategory></CreateCategory>

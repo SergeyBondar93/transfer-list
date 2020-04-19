@@ -52,7 +52,7 @@ export const Main = () => {
     [selectedCategory]
   );
 
-  const onCreate = useCallback(
+  const onSubmit = useCallback(
     ({ form, listName }) => {
       const newItems = {
         ...categoryData,
@@ -94,7 +94,13 @@ export const Main = () => {
   );
 
   const ListItemRenderer = (props) => {
-    return <ListItem {...props} onRemove={onRemove} />;
+    return (
+      <ListItem
+        {...props}
+        onRemove={onRemove}
+        selectedCategory={selectedCategory}
+      />
+    );
   };
 
   const ItemCreateRenderer = ({ listName }) => {
@@ -110,7 +116,7 @@ export const Main = () => {
           content={
             <CreateItem
               listName={listName}
-              onCreate={onCreate}
+              onSubmit={onSubmit}
               fields={schemas[selectedCategory.url]}
             />
           }
@@ -126,7 +132,7 @@ export const Main = () => {
           content={
             <CreateItem
               listName={listName}
-              onCreate={onMultiInsert}
+              onSubmit={onMultiInsert}
               fields={schemas["multy"]}
             />
           }

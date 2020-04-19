@@ -1,40 +1,41 @@
 const name = {
   name: "name",
-  required: true,
+  // required: true,
   minLength: 3,
   placeholder: "name",
 };
 
 const link = {
   name: "link",
-  required: true,
+  // required: true,
   minLength: 3,
   placeholder: "link",
 };
 
 const author = {
   name: "author",
-  required: true,
+  // required: true,
   minLength: 3,
   placeholder: "author",
 };
 
 const description = {
   name: "description",
-  required: true,
+  // required: true,
+  type: "textarea",
   minLength: 3,
   placeholder: "Description, to set the priority, use {!!!} (1/2/3)",
 };
 
 const lists = {
   name: "lists",
-  required: true,
+  // required: true,
   minLength: 3,
   placeholder: "Lists",
 };
 const multy = {
   name: "multy",
-  required: true,
+  // required: true,
   minLength: 3,
   type: "textarea",
   placeholder:

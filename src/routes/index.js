@@ -13,7 +13,7 @@ export const Routes = () => {
       </Sidebar>
       <Switch>
         {routerConfig.map((route) => {
-          return <Route {...route} />;
+          return <Route key={route.path} {...route} />;
         })}
       </Switch>
     </Router>

@@ -22,7 +22,7 @@ export const List = ({
               ref={provided.innerRef}
               style={{}}
             >
-              <ListWrapper width={listWidth - 30}>
+              <ListWrapper width={listWidth - 30 || 0}>
                 {items.map((item, index) => {
                   return (
                     <Draggable

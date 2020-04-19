@@ -12,7 +12,7 @@ export const CreateCategory = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories.data);
 
-  const onCreate = ({ form: { name = "", lists = "" } }) => {
+  const onSubmit = ({ form: { name = "", lists = "" } }) => {
     const $lists = lists.split(",").map((el) => el.trim());
     createCategory({ dispatch, name, lists: $lists, categories });
   };
@@ -20,7 +20,7 @@ export const CreateCategory = () => {
   return (
     <Popover
       trigger="click"
-      content={<CreateItem onCreate={onCreate} fields={schemas["category"]} />}
+      content={<CreateItem onSubmit={onSubmit} fields={schemas["category"]} />}
     >
       <div>
         New Category

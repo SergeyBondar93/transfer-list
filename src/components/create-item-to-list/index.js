@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Input from "@xcritical/input";
 import Button from "@xcritical/button";
 
-export const CreateItem = ({ onCreate, fields = [], listName }) => {
-  const [form, setForm] = useState({});
+export const CreateItem = ({ onSubmit, fields = [], listName, item = {} }) => {
+  const [form, setForm] = useState(item);
 
   const handleChange = useCallback(
     (value, e) => {
@@ -35,7 +35,7 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
 
   const handleCreate = useCallback(() => {
     if (!disabled) {
-      onCreate({ form, listName });
+      onSubmit({ form, listName });
     }
   }, [form, disabled, listName]);
 
@@ -67,6 +67,7 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
               <textarea
                 onChange={(e) => handleChange(e.target.value, e)}
                 name={field.name}
+                value={form[field.name]}
                 placeholder={field.placeholder}
                 id={field.id}
                 style={{
@@ -85,6 +86,7 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
             }}
           >
             <Input
+              value={form[field.name]}
               onChange={handleChange}
               name={field.name}
               placeholder={field.placeholder}
@@ -94,7 +96,7 @@ export const CreateItem = ({ onCreate, fields = [], listName }) => {
         );
       })}
       <Button disabled={disabled} onClick={handleCreate}>
-        Create
+        Submit
       </Button>
     </div>
   );
