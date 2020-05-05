@@ -17,30 +17,11 @@ export const CreateItem = ({ onSubmit, fields = [], listName, item = {} }) => {
     [form]
   );
 
-  const disabled = useMemo(() => {
-    let result = false;
-    fields.forEach(({ required, minLength, name, type = "string" }) => {
-      if (required) {
-        if (type === "string") {
-          if ((form[name] || "").length < minLength) result = true;
-        }
-        if (type === "array") {
-          const list = (form[name] || "").split(",").map((el) => el.trim());
-          if (list.length < minLength) result = true;
-        }
-      }
-    });
-    return result;
-  }, [form, fields]);
-
   const handleCreate = useCallback(() => {
-    if (!disabled) {
-      onSubmit({ form, listName });
-    }
-  }, [form, disabled, listName]);
+    onSubmit({ form, listName });
+  }, [form, listName]);
 
   if (!fields.length) {
-    console.error("Create Items need fields");
     return null;
   }
 
@@ -86,7 +67,7 @@ export const CreateItem = ({ onSubmit, fields = [], listName, item = {} }) => {
             }}
           >
             <Input
-              value={form[field.name]}
+              value={form[field.name] || ""}
               onChange={handleChange}
               name={field.name}
               placeholder={field.placeholder}
@@ -95,9 +76,7 @@ export const CreateItem = ({ onSubmit, fields = [], listName, item = {} }) => {
           </div>
         );
       })}
-      <Button disabled={disabled} onClick={handleCreate}>
-        Submit
-      </Button>
+      <Button onClick={handleCreate}>Submit</Button>
     </div>
   );
 };

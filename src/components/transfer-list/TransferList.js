@@ -39,7 +39,6 @@ export const TransferList = ({
     const endIndex = res.destination.index;
     const lastListName = res.source.droppableId;
     const newListName = res.destination.droppableId;
-
     let result = { ...mappedItems };
     /* удаление 1 элемента из массива */
     const [removed] = result[lastListName].splice(startIndex, 1);
@@ -52,11 +51,10 @@ export const TransferList = ({
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <TransferListWrapper ref={wrapperRef}>
+      <TransferListWrapper listsCount={lists.length} ref={wrapperRef}>
         {lists.map((listName) => {
           return (
             <List
-              listWidth={wrapperRef.current?.clientWidth / lists.length}
               key={listName}
               setItems={setMappedItems}
               listName={listName}

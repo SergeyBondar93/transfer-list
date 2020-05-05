@@ -2,36 +2,9 @@ import React, { useState, useCallback } from "react";
 import { Popover } from "@xcritical/popover";
 import { CreateItem } from "../create-item-to-list";
 import Button from "@xcritical/button";
-import { schemas } from "../../schemas";
-import { convertStyles } from "../../utils/popover";
-import { useSelector, useDispatch } from "react-redux";
-import { updateCategory } from "../../actions/requests";
+import { getFileds } from "../../schemas";
 
-export const EditItem = ({ item, index, listName, selectedCategory }) => {
-  const dispatch = useDispatch();
-  const { categories = [], categoryData } = useSelector((state) => {
-    const { data: categories } = state.categories;
-    const { data: categoryData } = state.category;
-    return {
-      categories,
-      categoryData,
-    };
-  });
-
-  const onEditEnd = useCallback(
-    ({ form, listName }) => {
-      const newItems = {
-        ...categoryData,
-        [listName]: [...categoryData[listName]],
-      };
-
-      newItems[listName][index] = form;
-
-      updateCategory({ data: newItems, dispatch, url: selectedCategory.url });
-    },
-    [index, selectedCategory]
-  );
-
+export const EditItem = ({ item, index, listName, list, onUpdateItem }) => {
   return (
     <Popover
       trigger="click"
@@ -40,8 +13,8 @@ export const EditItem = ({ item, index, listName, selectedCategory }) => {
         <CreateItem
           listName={listName}
           item={item}
-          onSubmit={onEditEnd}
-          fields={schemas[selectedCategory.url]}
+          onSubmit={(params) => onUpdateItem({ ...params, index })}
+          fields={getFileds(list.name)}
         />
       }
     >

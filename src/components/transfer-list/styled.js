@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const ListWrapper = styled.div`
-  width: ${({ width }) => `${width}px`};
   height: calc(100vh - 150px);
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 5px;
+  overflow: auto;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 export const ItemWrapper = styled.div`
@@ -20,9 +22,13 @@ export const ItemWrapper = styled.div`
 
 export const TransferListWrapper = styled.div`
   border: 1px solid #ccc;
+  > div {
+    width: ${({ listsCount }) => `${100 / listsCount}%`};
+  }
   border-radius: 10px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   user-select: none;
+  flex-basis: 100%;
 `;

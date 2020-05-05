@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 
 import { Provider } from "react-redux";
+
+import { Notification } from "@xcritical/notification";
+
 import { store } from "./reducers";
 import { Routes } from "./routes";
-import { theme } from "./theme";
+import { globalTheme } from "./theme";
 import styled, { ThemeProvider } from "styled-components";
 
 const Wrapper = styled.div`
@@ -16,7 +19,8 @@ const App = () => {
   return (
     <Wrapper>
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={globalTheme}>
+          <Notification />
           <Routes />
         </ThemeProvider>
       </Provider>

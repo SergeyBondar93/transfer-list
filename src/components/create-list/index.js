@@ -6,24 +6,24 @@ import Button from "@xcritical/button";
 import { CreateItem } from "../create-item-to-list";
 import { schemas } from "../../schemas";
 import { useDispatch, useSelector } from "react-redux";
-import { createCategory } from "../../actions/requests";
+import { createList } from "../../actions/requests";
 
-export const CreateCategory = () => {
+export const CreateList = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.data);
+  const list = useSelector((state) => state.list.data);
 
   const onSubmit = ({ form: { name = "", lists = "" } }) => {
     const $lists = lists.split(",").map((el) => el.trim());
-    createCategory({ dispatch, name, lists: $lists, categories });
+    createList({ dispatch, name, lists: $lists, list });
   };
 
   return (
     <Popover
       trigger="click"
-      content={<CreateItem onSubmit={onSubmit} fields={schemas["category"]} />}
+      content={<CreateItem onSubmit={onSubmit} fields={schemas["list"]} />}
     >
       <div>
-        New Category
+        New List
         <Button>+</Button>
       </div>
     </Popover>

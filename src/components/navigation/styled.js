@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const LinkCategoryWrapper = styled.div`
+export const LinkListWrapper = styled(Link)`
   padding: 15px;
   border: 1px solid #ccc;
   text-shadow: ${({ isCurrent }) => isCurrent && "0px 0px 9px red"};

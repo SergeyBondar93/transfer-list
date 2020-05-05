@@ -1,46 +1,41 @@
 import React, { useCallback } from "react";
-import { CreateCategory } from "../create-category";
+import { CreateList } from "../create-list";
 import { useSelector, useDispatch } from "react-redux";
-import { changeSelectedCategory } from "../../actions/actions";
-import { LinkCategoryWrapper } from "./styled";
-
-const Link = ({ category }) => {
-  const dispatch = useDispatch();
-
-  const selectedCategory = useSelector((state) => {
-    const selectedCategory = state.categories.selectedCategory || {};
-    return selectedCategory;
-  });
-
-  const onSelect = useCallback(() => {
-    dispatch(changeSelectedCategory(category));
-  }, [category]);
-
-  return (
-    <LinkCategoryWrapper
-      onClick={onSelect}
-      isCurrent={category.name === selectedCategory.name}
-    >
-      {category.name}
-    </LinkCategoryWrapper>
-  );
-};
+import { changeSelectedList } from "../../actions/actions";
+import { LinkListWrapper } from "./styled";
+import { Link } from "react-router-dom";
+import { getList } from "../../actions/requests";
 
 export const Navigation = () => {
-  const { data: categories } = useSelector((state) => state.categories);
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const handleClick = useCallback((id) => {
+    getList({ dispatch, id });
+  }, []);
 
   return (
     <div
       style={{
         marginTop: "50px",
         marginLeft: "50px",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      {categories.map((category) => {
-        return <Link key={category.url} category={category} />;
+      {state.allLists.map((list) => {
+        return (
+          <LinkListWrapper
+            onClick={() => handleClick(list._id)}
+            to={`/list/${list._id}`}
+          >
+            {" "}
+            {list.name}{" "}
+          </LinkListWrapper>
+        );
       })}
 
-      <CreateCategory></CreateCategory>
+      <CreateList></CreateList>
     </div>
   );
 };

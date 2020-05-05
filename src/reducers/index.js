@@ -2,40 +2,47 @@ import { createStore, combineReducers } from "redux";
 import { setIn } from "utilitify";
 
 import {
-  GET_CATEGORIES,
-  GET_CATEROGY,
-  CHANGE_SELECTED_CATEGORY,
+  GET_ALL_LISTS,
+  GET_LIST,
+  GET_USER,
+  LIST_CREATED_SUCCESS,
 } from "../actions/consts";
 
 const initialState = {
-  categories: {
-    data: [],
-    selectedCategory: null,
-  },
-  caterogy: {
-    data: [],
-  },
+  allLists: [],
+  list: {},
   registry: {},
   errors: {},
+  user: {},
 };
 
-const categories = (state = initialState.categories, action) => {
+const allLists = (state = initialState.allLists, action) => {
   switch (action.type) {
-    case GET_CATEGORIES: {
-      return setIn(state, action.payload, ["data"]);
+    case GET_ALL_LISTS: {
+      return action.payload;
     }
-    case CHANGE_SELECTED_CATEGORY: {
-      return setIn(state, action.payload, ["selectedCategory"]);
+    case LIST_CREATED_SUCCESS: {
+      return [...state, action.payload];
     }
     default:
       return state;
   }
 };
 
-const category = (state = initialState.caterogy, action) => {
+const list = (state = initialState.list, action) => {
   switch (action.type) {
-    case GET_CATEROGY: {
-      return setIn(state, action.payload, ["data"]);
+    case GET_LIST: {
+      return { ...state, ...action.payload };
+    }
+    default:
+      return state;
+  }
+};
+
+const user = (state = initialState.user, action) => {
+  switch (action.type) {
+    case GET_USER: {
+      return action.payload;
     }
     default:
       return state;
@@ -44,8 +51,9 @@ const category = (state = initialState.caterogy, action) => {
 
 export const store = createStore(
   combineReducers({
-    categories,
-    category,
+    allLists,
+    list,
+    user,
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

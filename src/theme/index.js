@@ -1,9 +1,8 @@
-import { popoverThemeNamespace } from "@xcritical/popover";
+import { popover } from "./popover";
+import { input } from "./input";
 
-export const theme = {
-  [popoverThemeNamespace]: {
-    content: {
-      zIndex: 100000,
-    },
-  },
+
+export const globalTheme = {
+  ...popover,
+  ...input
 };

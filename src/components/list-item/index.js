@@ -12,7 +12,8 @@ export const ListItem = ({
   listName,
   item,
   onRemove,
-  selectedCategory,
+  list,
+  onUpdateItem,
 }) => {
   const $item = Object.entries(item).filter(([key]) => {
     return !key.startsWith("_");
@@ -46,8 +47,9 @@ export const ListItem = ({
       <div>
         <Button onClick={() => onRemove({ index, listName })}>x</Button>
         <EditItem
+          onUpdateItem={onUpdateItem}
           item={item}
-          selectedCategory={selectedCategory}
+          list={list}
           index={index}
           listName={listName}
         />

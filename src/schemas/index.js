@@ -49,6 +49,10 @@ export const schemas = {
   courses: [name, link, description],
   work: [name, link, description],
   other: [name, link, description],
-  category: [name, lists],
+  list: [name, lists],
   multy: [multy],
+};
+
+export const getFileds = () => {
+  return [name, link, description];
 };
