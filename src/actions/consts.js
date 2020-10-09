@@ -7,3 +7,8 @@ export const GET_ERROR = "GET_ERROR";
 
 export const GET_USER = "GET_USER";
 export const LIST_CREATED_SUCCESS = "LIST_CREATED_SUCCESS";
+
+export const LOGOUT = "LOGOUT";
+
+export const APP_INIT = "APP_INIT";
+export const APP_ERROR = "APP_ERROR";

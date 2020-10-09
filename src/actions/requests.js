@@ -7,31 +7,25 @@ import {
   getError,
   setUser,
   listCreatedSuccess,
+  appInit,
 } from "./actions";
+import { LOGOUT } from "./consts";
 
 export const getAllLists = ({ dispatch }) => {
-  dispatch(registryUpdate("loading", true));
-
   fetch("/list")
     .then((res) => res.json())
     .then((data) => dispatch(getAllListsSuccess(data)))
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };
 
 export const getList = ({ dispatch, id }) => {
-  dispatch(registryUpdate("loading", true));
   fetch(`/list/${id}`)
     .then((res) => res.json())
     .then((data) => dispatch(getListSuccess(data)))
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };
 
 export const updateList = ({ dispatch, data, id, assignedUsers, name }) => {
-  dispatch(registryUpdate("loading", true));
   const requestData = {};
   /* TODO в случае ошибки вернуть прошлое состояние  */
   if (data) {
@@ -49,23 +43,19 @@ export const updateList = ({ dispatch, data, id, assignedUsers, name }) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => {
+    .then(() => {
       console.log("success");
     })
     .catch((e) => getError(e));
 
-  dispatch(registryUpdate("loading", false));
-
-  notify("List updated", {
-    type: "success",
-    transition: Zoom,
-    autoClose: 700,
-  });
+  // notify("List updated", {
+  //   type: "success",
+  //   transition: Zoom,
+  //   autoClose: 700,
+  // });
 };
 
 export const createList = ({ dispatch, name, lists }) => {
-  dispatch(registryUpdate("loading", true));
-
   const data = lists.map((listName) => ({
     listName,
     listItems: [],
@@ -82,8 +72,6 @@ export const createList = ({ dispatch, name, lists }) => {
     .then((data) => {
       dispatch(listCreatedSuccess(data));
     });
-
-  dispatch(registryUpdate("loading", false));
 };
 
 const getUserSuccess = ({ user, dispatch }) => {
@@ -93,8 +81,6 @@ const getUserSuccess = ({ user, dispatch }) => {
 };
 
 export const login = ({ form, dispatch }) => {
-  dispatch(registryUpdate("loading", true));
-
   fetch("/login", {
     method: "POST",
     body: JSON.stringify(form),
@@ -105,37 +91,32 @@ export const login = ({ form, dispatch }) => {
     .then((res) => res.json())
     .then((user) => getUserSuccess({ user, dispatch }))
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };
 
 export const getAuthUser = ({ dispatch }) => {
-  dispatch(registryUpdate("loading", true));
-
   fetch("/login")
     .then((res) => res.json())
-    .then((user) => getUserSuccess({ user, dispatch }))
+    .then((user) => {
+      getUserSuccess({ user, dispatch });
+      dispatch(appInit());
+    })
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };
 
 export const getLogout = ({ dispatch }) => {
-  dispatch(registryUpdate("loading", true));
+  dispatch({
+    type: LOGOUT,
+  });
+
   fetch("/logout")
     .then((res) => res.json())
     .then(() => {
       sessionStorage.removeItem("isAuth");
-      dispatch(setUser({ isAuth: false }));
     })
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };
 
 export const register = ({ form, dispatch }) => {
-  dispatch(registryUpdate("loading", true));
-
   fetch("/reg", {
     method: "POST",
     body: JSON.stringify(form),
@@ -146,6 +127,4 @@ export const register = ({ form, dispatch }) => {
     .then((res) => res.json())
     .then((user) => getUserSuccess({ user, dispatch }))
     .catch((e) => getError(e));
-
-  dispatch(registryUpdate("loading", false));
 };

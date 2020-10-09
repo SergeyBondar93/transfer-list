@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const WrapperCenteredBlock = styled.div`
   display: flex;
   width: ${({ width }) => width || "300px"};
-  border: 1px solid black;
+  border: ${({ border }) => border || "1px solid black"};
   border-radius: 15px;
   flex-direction: column;
   position: absolute;

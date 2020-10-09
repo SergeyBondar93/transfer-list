@@ -1,16 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import { TransferList } from "../components/transfer-list";
 
 import { CreateItem } from "../components/create-item-to-list";
 import { schemas, getFileds } from "../schemas";
 import { ListItem } from "../components/list-item";
-import Button from "@xcritical/button";
 import { Popover } from "@xcritical/popover";
 import upperCase from "lodash/upperCase";
 import { updateList, getList } from "../actions/requests";
@@ -20,12 +13,15 @@ import {
   transformListsToServer,
 } from "../utils/transforms";
 import { getListSuccess } from "../actions/actions";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+import StickerPlusOutline from "mdi-react/StickerPlusOutlineIcon";
+import TableLargePlusIcon from "mdi-react/TableLargePlusIcon";
 
 export const List = () => {
   const dispatch = useDispatch();
-  const sortOrder = useRef(">");
   const queryParams = useParams();
+  const sortOrder = useRef(">");
 
   const list = useSelector((state) => {
     const { list } = state;
@@ -101,7 +97,7 @@ export const List = () => {
     ({ index, listName, form }) => {
       const items = transformListsToTransferListComponent(list.data);
       items[listName][index] = form;
-
+      console.log(form);
       updateList({
         data: transformListsToServer(items),
         dispatch,
@@ -112,7 +108,7 @@ export const List = () => {
   );
 
   const onSort = useCallback(
-    ({ listName, sortBy = "priority" }) => {
+    ({ listName, _sortBy = "priority" }) => {
       const items = transformListsToTransferListComponent(list.data);
       items[listName] = items[listName].sort(
         ({ description: d1 }, { description: d2 }) => {
@@ -145,47 +141,79 @@ export const List = () => {
     return (
       <div
         style={{
-          display: "flex",
+          marginTop: "15px",
+          marginBottom: "10px",
+          background: "rgba(255,255,255,0.7)",
+          padding: "10px",
         }}
       >
-        <Button onClick={() => onSort({ listName })}>Sort</Button>
-        <Popover
-          trigger="click"
-          position="bottom left"
-          content={
-            <CreateItem
-              listName={listName}
-              onSubmit={onSubmit}
-              fields={getFileds()}
-            />
-          }
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "10px",
+            alignItems: "flex-end",
+            cursor: "pointer",
+            padding: "0 10px",
+          }}
+          title="sort by priority"
         >
-          <div>
-            {upperCase(listName)}
-            <Button>+</Button>
+          <span onClick={() => onSort({ listName })}>
+            {listName.slice(0, 1).toUpperCase()}
+            {listName.slice(1)}
+          </span>
+          {/* </div> */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "50px",
+            }}
+          >
+            <Popover
+              trigger="click"
+              position="bottom left"
+              content={
+                <CreateItem
+                  listName={listName}
+                  onSubmit={onSubmit}
+                  fields={getFileds()}
+                />
+              }
+            >
+              <StickerPlusOutline
+                size="18"
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            </Popover>
+            <Popover
+              trigger="click"
+              position="bottom left"
+              content={
+                <CreateItem
+                  listName={listName}
+                  onSubmit={onMultiInsert}
+                  fields={schemas["multy"]}
+                />
+              }
+            >
+              <TableLargePlusIcon
+                size="18"
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            </Popover>
           </div>
-        </Popover>
-        <Popover
-          trigger="click"
-          position="bottom left"
-          content={
-            <CreateItem
-              listName={listName}
-              onSubmit={onMultiInsert}
-              fields={schemas["multy"]}
-            />
-          }
-        >
-          <div>
-            <Button>Multi</Button>
-          </div>
-        </Popover>
+        </div>
       </div>
     );
   };
 
   return (
-    <>
+    <div>
       {list.data ? (
         <TransferList
           items={transformListsToTransferListComponent(list.data)}
@@ -197,6 +225,6 @@ export const List = () => {
       ) : (
         <p>You havent lists in this list</p>
       )}
-    </>
+    </div>
   );
 };

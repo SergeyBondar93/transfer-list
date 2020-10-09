@@ -25,8 +25,8 @@ const SidebarWrapper = ({ children, ...props }) => {
       collapsed={params.collapsed}
       onChangeState={onChangeState}
       navWidth={0}
-      minWidth={100}
-      minimizedWidth={5}
+      minWidth={150}
+      minimizedWidth={83}
       maxWidth={300}
     >
       {children}

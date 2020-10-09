@@ -6,6 +6,8 @@ import {
   CHANGE_SELECTED_LIST,
   GET_USER,
   LIST_CREATED_SUCCESS,
+  APP_INIT,
+  APP_ERROR,
 } from "./consts";
 
 export const getAllListsSuccess = (payload) => {
@@ -52,5 +54,17 @@ export const setUser = (user) => {
   return {
     type: GET_USER,
     payload: user,
+  };
+};
+
+export const appInit = () => {
+  return {
+    type: APP_INIT,
+  };
+};
+
+export const appError = () => {
+  return {
+    type: APP_ERROR,
   };
 };

@@ -6,6 +6,7 @@ export const input = {
     border: "none",
     borderBottom: "1px solid #ccc",
     borderRadius: "0px",
+    padding: 0,
     input: {
       color: "black",
       fontSize: "16px",

@@ -14,7 +14,6 @@ export const List = ({ items = [], listName, ListItem, HeaderComponent }) => {
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              style={{}}
               id={listName}
               className="list"
             >
